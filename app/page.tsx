@@ -8,7 +8,7 @@ export default async function Home() {
 
   return (
     <div className="mx-auto flex h-screen max-w-xs flex-col overflow-hidden bg-[#f6f5fb]">
-      <div className="relative mt-1 max-w-xs text-center">Mini E-Commerce</div>
+      <div className="relative mt-1 max-w-xs text-ce">Mini E-Commerce</div>
       <ProductList products={products} />
       <CartSummary />
     </div>
