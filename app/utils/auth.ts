@@ -20,9 +20,6 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
 
-        console.log('asdfasdfasfd');
-        console.log(credentials);
-
         if (!credentials?.phone || !credentials?.password) {
           throw new Error("Phone and password required")
         }
@@ -49,8 +46,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log('jwt');
-      console.log({ token, user });
       if (user) {
         token.id = user.id
         token.phone = user.phone
@@ -61,8 +56,6 @@ export const authOptions: NextAuthOptions = {
       return token
     },
     async session({ session, token }) {
-      console.log('session');
-      console.log({ session, token });
       if (token) {
         session.user = {
           ...session.user,
