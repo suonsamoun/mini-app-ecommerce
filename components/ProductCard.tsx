@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { Product } from "../types";
 import { useCart } from "./CartProvider";
+import { TProduct } from "@/drizzle/schema/products";
 
 interface ProductCardProps {
-  product: Product;
+  product: TProduct;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
@@ -15,7 +15,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="rounded-lg border p-4 shadow-md">
       <img
-        src={product.image}
+        src={product.image!}
         alt={product.name}
         className="h-32 w-full object-cover rounded-md mb-4"
       />

@@ -1,15 +1,15 @@
 "use client";
 
+import { TProduct } from "@/drizzle/schema/products";
 import React, { createContext, useContext, useState } from "react";
-import { Product } from "../types";
-
-interface CartItem extends Product {
+interface CartItem extends TProduct {
   quantity: number;
+  price: string;
 }
 
 interface CartContextProps {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: TProduct) => void;
   removeFromCart: (productId: number) => void;
   incrementQuantity: (productId: number) => void;
   decrementQuantity: (productId: number) => void;
@@ -23,7 +23,7 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: TProduct) => {
     setCart((prev) => {
       const existingItem = prev.find((item) => item.id === product.id);
       if (existingItem) {
@@ -62,7 +62,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return item ? item.quantity : 0;
   };
 
-  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
   const totalCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (

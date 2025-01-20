@@ -2,10 +2,10 @@
 
 import React from "react";
 import ProductCard from "./ProductCard";
-import { Product } from "../types";
+import { TProduct } from "@/drizzle/schema/products";
 
 interface ProductListProps {
-  products: Product[];
+  products: TProduct[];
 }
 
 export default function ProductList({ products }: ProductListProps) {
