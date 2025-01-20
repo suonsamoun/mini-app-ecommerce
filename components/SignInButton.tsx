@@ -13,6 +13,9 @@ const SignInButton = () => {
     setIsLoading(true);
 
     await signIn('credentials', {
+      phone: "093879098",
+      password: "879098",
+      redirect: true,
       callbackUrl: searchParams?.get('from') ?? '/',
     });
 
@@ -29,3 +32,4 @@ const SignInButton = () => {
 };
 
 export default SignInButton;
+
