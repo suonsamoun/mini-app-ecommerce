@@ -5,7 +5,8 @@ export const env = createEnv({
     server: {
         APP_ENV: z.string(),
         NEXTAUTH_URL: z.string().url().optional(),
-        NEXTAUTH_SECRET: z.string().min(1)
+        NEXTAUTH_SECRET: z.string().min(1),
+        DATABASE_URL: z.string().url(),
     },
     client: {
         NEXT_PUBLIC_APP_URL: z.string().min(1)
@@ -14,6 +15,7 @@ export const env = createEnv({
         APP_ENV: process.env.APP_ENV,
         NEXTAUTH_URL: process.env.NEXTAUTH_URL,
         NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-        NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL
+        NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+        DATABASE_URL: process.env.DATABASE_URL,
     },
 });

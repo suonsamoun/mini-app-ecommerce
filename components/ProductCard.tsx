@@ -21,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       />
       <h3 className="text-lg">{product.name}</h3>
       <p className="text-sm text-gray-500">{product.description}</p>
-      <p className="text-lg font-semibold mt-2">${product.price.toFixed(2)}</p>
+      <p className="text-lg font-semibold mt-2">${product.price}</p>
       {quantity > 0 ? (
         <div className="flex items-center space-x-2 mt-2">
           <button
