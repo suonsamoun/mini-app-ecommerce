@@ -17,9 +17,12 @@ export default function CartSummary() {
         <span className="text-sm font-medium text-gray-600">Total Price:</span>
         <span className="text-sm font-semibold">${totalPrice}</span>
       </div>
-      <div className="mx-2.5 mt-2">
-        <button className="w-full rounded-md bg-[#ff8e00] py-2 font-semibold text-white">
-          Pay Now
+      <div className="mx-2.5 mt-2 flex space-x-2 justify-center items-center">
+        <button className="rounded-md w-full text-xs bg-[#ff8e00] py-2 font-semibold text-white">
+          Pay (USD) 
+        </button> 
+        <button className="rounded-md w-full text-xs bg-[#ff8e00] py-2 font-semibold text-white">
+          Pay (KHR)
         </button>
       </div>
     </div>

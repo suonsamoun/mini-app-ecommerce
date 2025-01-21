@@ -1,6 +1,5 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
@@ -12,12 +11,9 @@ const SignInButton = () => {
   const onSignIn = async () => {
     setIsLoading(true);
 
-    await signIn('credentials', {
-      phone: "093879098",
-      password: "879098",
-      redirect: true,
-      callbackUrl: searchParams?.get('from') ?? '/',
-    });
+    // await signIn('credentials', {
+    //   callbackUrl: searchParams?.get('from') ?? '/',
+    // });
 
     setIsLoading(false);
   };
@@ -32,4 +28,3 @@ const SignInButton = () => {
 };
 
 export default SignInButton;
-

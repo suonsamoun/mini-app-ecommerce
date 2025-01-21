@@ -1,9 +1,23 @@
-import { getServerSession } from 'next-auth/next';
+import { sessionOptions } from './config';
+import { getIronSession } from 'iron-session';
+import { cookies } from 'next/headers';
 
-import { authOptions } from './auth';
+export interface SessionData {
+  userId?: number;
+  userName?: string;
+  email?: string;
+  phone: string;
+  isLoggedIn: boolean;
+  refreshToken: string;
+  accessToken: string;
+}
 
-export async function getCurrentUser() {
-    const session = await getServerSession(authOptions);
+export async function getSession() {
+  const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
 
-    return session?.user;
+  if (!session.isLoggedIn) {
+    session.isLoggedIn = false;
+  }
+
+  return session;
 }
