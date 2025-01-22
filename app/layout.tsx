@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { LoginWithCore } from "../server/login";
-import { JsBridgeProvider } from "../context/JSBridgeContext";
-import { JsBridgeLayout } from "../layout/js-bridge-layout";
+import { LoginWithCore } from "@/server/login";
+import JsBridgeLayout from "../layout/js-bridge-layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,14 +29,17 @@ export default async function RootLayout({
   if (response) {
     token = response.access_token
   }
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <JsBridgeLayout token={token}>
-          {children}
-        </JsBridgeLayout>
+        <div className="p-4">
+          <JsBridgeLayout token={token}>
+            {children}
+          </JsBridgeLayout>
+        </div>
       </body>
     </html>
   );

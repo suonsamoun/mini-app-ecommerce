@@ -1,49 +1,44 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 
 interface JSBridgeContextProp {
-    userinfo: any
+    userInfo?: string
     invoke: (method: string, params: any) => void
     bridgeResponse: (method: string, params: any) => void
 }
 
 const JSBridgeContext = createContext<JSBridgeContextProp | undefined>(undefined)
 
-export const JsBridgeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [userinfo, setUserInfo] = useState<any>(undefined);
+export const JsBridgeProvider: React.FC<{ children: ReactNode }> = ({ children}) => {
+    const [userInfo, setUserInfo] = useState(undefined);
+    
 
-    const invoke = (method: string, params: string) => {
-        if (typeof window !== "undefined") {
-            // @ts-ignore
+    const invoke = (method: string, params: any) => {
+        if (typeof window !== 'undefined') {
             if (window.webkit && window.webkit.messageHandlers) {
-                // @ts-ignore
                 window.webkit.messageHandlers[method].postMessage(params);
-            }
-            // @ts-ignore
-            else if (window?.tmJSBridge && typeof window.tmJSBridge[method] === 'function') {
-                // @ts-ignore
+            }else if (window?.tmJSBridge && typeof window.tmJSBridge[method] === 'function') {
                 const result = window.tmJSBridge[method](params);
-                setUserInfo(result);
+                bridgeResponse(method, result);
             }
+        }   
+    }
+    
+    const bridgeResponse = (method: string, params: any) => {
+        if (method == 'getUserInfo') {
+            setUserInfo(params);
         }
-        return null;
     }
-    const bridgeResponse = (method: string, params: string) => {
-        console.log('work');
-        setUserInfo(params);
-    }
+
     useEffect(() => {
-        // @ts-ignore
         window.handleNativeResponse = bridgeResponse;
-        
         return () => {
-            // @ts-ignore
             delete window.handleNativeResponse;
         };
-    }, []);
+    }, [])
 
-    return (<JSBridgeContext value={{ invoke, bridgeResponse, userinfo }}>
+    return <JSBridgeContext value={{userInfo, invoke, bridgeResponse}}>
         {children}
-    </JSBridgeContext>)
+    </JSBridgeContext>
 }
 
 export const useJsBridge = () => {

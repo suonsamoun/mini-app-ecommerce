@@ -1,13 +1,19 @@
+'use client'
 
-export default async function Home() {
-  
+import { useJsBridge } from "@/context/JSBridgeContext";
+
+export default function Home() {
+  const {userInfo} = useJsBridge()
   return (
-    <div className="mx-auto flex h-screen max-w-xs flex-col overflow-hidden bg-[#f6f5fb]">
-      <div className="relative mt-1 max-w-xs text-center">
-        <h1>Welcome To Mini App Testing</h1>
+    <div className="">
+      <h1 className="text-3xl font-bold text-center">Welcome to Mini App</h1>
+      <div className="flex flex-col items-center mt-6">
+        <div>
+          <div>Your info : {userInfo}</div>
+          <button type="button" className="border p-2 rounded">Checkout</button>
+          <button type="button" className="border p-2 rounded ml-2">Payment Status</button>
+        </div>
       </div>
-      {/* <UserInfo token={token}/> */}
-      {/* <CartSummary /> */}
     </div>
   );
 }
