@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 
 
 const InitailCallToNative = ({ token, children }: { token: string, children: React.ReactNode }) => {
-    const {invoke, userinfo} = useJsBridge();
+    const {invoke, userInfo} = useJsBridge();
     useEffect(() => {
         invoke('setTitle', 'Mini App')
         invoke('getUserInfo', JSON.stringify({'mini-app-access-token': token}))
@@ -14,7 +14,7 @@ const InitailCallToNative = ({ token, children }: { token: string, children: Rea
         <div>Test</div>
         {children}
         <div>
-            {userinfo}
+            {userInfo}
         </div>
     </>
 }
